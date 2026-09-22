@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+export const LOG_LEVEL_OPTIONS = ['Error', 'Warn', 'Info', 'Debug', 'Trace'] as const;
+
 @Component({
   selector: 'app-log-input',
   standalone: true,
@@ -10,8 +12,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class LogInputComponent {
   @Output() content = new EventEmitter<string>();
+  @Output() levelFilterChange = new EventEmitter<Set<string>>();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
+  readonly levelOptions = LOG_LEVEL_OPTIONS;
+  selectedLevels = new Set<string>();
 
   pastedText = '';
   fileName: string | null = null;
@@ -58,6 +64,17 @@ export class LogInputComponent {
     this.pastedText = '';
     this.fileName = null;
     this.content.emit('');
+  }
+
+  toggleLevel(level: string, event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    const upperLevel = level.toUpperCase();
+    if (checked) {
+      this.selectedLevels.add(upperLevel);
+    } else {
+      this.selectedLevels.delete(upperLevel);
+    }
+    this.levelFilterChange.emit(new Set(this.selectedLevels));
   }
 
   private readFile(file: File): void {

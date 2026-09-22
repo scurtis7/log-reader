@@ -13,8 +13,11 @@ import { LogEntry } from '../../models/log-entry.model';
 })
 export class HomeComponent {
   entries: LogEntry[] = [];
+  filteredEntries: LogEntry[] = [];
   error: string | null = null;
   parseErrorCount = 0;
+
+  private selectedLevels = new Set<string>();
 
   constructor(private readonly logParser: LogParserService) {}
 
@@ -23,6 +26,7 @@ export class HomeComponent {
       this.entries = [];
       this.error = null;
       this.parseErrorCount = 0;
+      this.applyFilter();
       return;
     }
 
@@ -32,5 +36,21 @@ export class HomeComponent {
     this.error = result.entries.length === 0
       ? 'No valid JSON log entries were found in the provided content.'
       : null;
+    this.applyFilter();
+  }
+
+  onLevelFilterChange(levels: Set<string>): void {
+    this.selectedLevels = levels;
+    this.applyFilter();
+  }
+
+  private applyFilter(): void {
+    if (this.selectedLevels.size === 0) {
+      this.filteredEntries = this.entries;
+      return;
+    }
+    this.filteredEntries = this.entries.filter(
+      (entry) => !!entry.level && this.selectedLevels.has(entry.level.toUpperCase())
+    );
   }
 }

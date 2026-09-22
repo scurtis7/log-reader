@@ -1,6 +1,7 @@
 .container {
   margin: 10px;
-  max-width: 900px;
+  width: auto;
+  box-sizing: border-box;
 }
 
 .instructions {

@@ -9,8 +9,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 90px;
-  padding: 16px;
+  min-height: 50px;
+  padding: 10px 16px;
   border: 2px dashed #606c38;
   border-radius: 8px;
   background-color: rgba(96, 108, 56, 0.06);
@@ -63,7 +63,38 @@
 
 .log-input__actions {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.log-input__buttons {
+  display: flex;
   gap: 8px;
+}
+
+.log-input__filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.log-input__filter {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #283618;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  user-select: none;
+
+  input[type='checkbox'] {
+    accent-color: #606c38;
+    cursor: pointer;
+  }
 }
 
 .log-input__button {

@@ -32,7 +32,18 @@
   ></textarea>
 
   <div class="log-input__actions">
-    <button type="button" class="log-input__button" (click)="format()">Format Logs</button>
-    <button type="button" class="log-input__button log-input__button--secondary" (click)="clear()">Clear</button>
+    <div class="log-input__buttons">
+      <button type="button" class="log-input__button" (click)="format()">Format Logs</button>
+      <button type="button" class="log-input__button log-input__button--secondary" (click)="clear()">Clear</button>
+    </div>
+
+    <div class="log-input__filters">
+      @for (level of levelOptions; track level) {
+        <label class="log-input__filter">
+          <input type="checkbox" (change)="toggleLevel(level, $event)" />
+          {{ level }}
+        </label>
+      }
+    </div>
   </div>
 </section>
