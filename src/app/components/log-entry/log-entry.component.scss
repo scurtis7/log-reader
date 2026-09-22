@@ -1,0 +1,139 @@
+:host {
+  display: block;
+}
+
+.log-entry {
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(40, 54, 24, 0.15);
+  border-left: 4px solid #606c38;
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(40, 54, 24, 0.06);
+
+  &--warn {
+    border-left-color: #dda15e;
+  }
+
+  &--error,
+  &--severe,
+  &--fatal {
+    border-left-color: #bc6c25;
+  }
+
+  &--debug,
+  &--trace {
+    border-left-color: #8a8a8a;
+  }
+}
+
+.log-entry__header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.log-entry__badge {
+  padding: 1px 8px;
+  border-radius: 10px;
+  background-color: #606c38;
+  color: #fefae0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+
+  .log-entry--warn & {
+    background-color: #dda15e;
+    color: #283618;
+  }
+
+  .log-entry--error &,
+  .log-entry--severe &,
+  .log-entry--fatal & {
+    background-color: #bc6c25;
+    color: #fefae0;
+  }
+
+  .log-entry--debug &,
+  .log-entry--trace & {
+    background-color: #8a8a8a;
+    color: #fefae0;
+  }
+}
+
+.log-entry__timestamp {
+  color: #606c38;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+}
+
+.log-entry__message {
+  margin: 4px 0;
+  color: #283618;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.log-entry__fields {
+  margin: 6px 0 0;
+  padding-top: 6px;
+  border-top: 1px solid rgba(40, 54, 24, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.log-entry__field {
+  display: flex;
+  gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.4;
+
+  dt {
+    flex-shrink: 0;
+    color: #606c38;
+    font-weight: 600;
+
+    &::after {
+      content: ':';
+    }
+  }
+
+  dd {
+    margin: 0;
+    color: #283618;
+    word-break: break-word;
+  }
+}
+
+.log-entry__object {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.log-entry__object-entry {
+  em {
+    color: #606c38;
+    font-style: normal;
+    font-weight: 600;
+  }
+}
+
+.log-entry__pre {
+  margin: 2px 0 0;
+  padding: 8px;
+  background-color: #fefae0;
+  border-radius: 4px;
+  color: #283618;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

@@ -1,0 +1,38 @@
+<section class="log-input">
+  <div
+    class="log-input__dropzone"
+    [class.log-input__dropzone--active]="isDragOver"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    (click)="fileInput.click()"
+  >
+    @if (fileName) {
+      <p>Loaded file: <strong>{{ fileName }}</strong></p>
+    } @else {
+      <p>Drag &amp; drop a <strong>.json</strong> or <strong>.ndjson</strong> file here, or click to browse</p>
+    }
+    <input
+      #fileInput
+      type="file"
+      accept=".json,.ndjson,application/json,text/plain"
+      hidden
+      (change)="onFileSelected($event)"
+    />
+  </div>
+
+  <div class="log-input__divider">or paste content below</div>
+
+  <textarea
+    class="log-input__textarea"
+    placeholder="Paste NDJSON or JSON log content here..."
+    rows="6"
+    [(ngModel)]="pastedText"
+    (paste)="onPaste()"
+  ></textarea>
+
+  <div class="log-input__actions">
+    <button type="button" class="log-input__button" (click)="format()">Format Logs</button>
+    <button type="button" class="log-input__button log-input__button--secondary" (click)="clear()">Clear</button>
+  </div>
+</section>

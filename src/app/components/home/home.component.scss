@@ -1,4 +1,40 @@
-
 .container {
   margin: 10px;
+  max-width: 900px;
+}
+
+.instructions {
+  margin: 0 0 16px;
+  color: #283618;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 10px;
+  color: #606c38;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+}
+
+.summary__errors {
+  color: #bc6c25;
+}
+
+.error {
+  padding: 10px 14px;
+  border: 1px solid #bc6c25;
+  border-radius: 6px;
+  background-color: rgba(188, 108, 37, 0.1);
+  color: #bc6c25;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+}
+
+.entries {
+  display: flex;
+  flex-direction: column;
 }

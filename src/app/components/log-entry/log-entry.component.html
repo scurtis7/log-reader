@@ -1,0 +1,41 @@
+<article class="log-entry" [class]="levelClass">
+  <header class="log-entry__header">
+    @if (entry.level) {
+      <span class="log-entry__badge">{{ entry.level }}</span>
+    }
+    @if (entry.timestamp) {
+      <time class="log-entry__timestamp">{{ entry.timestamp | date: 'yyyy-MM-dd HH:mm:ss.SSS' }}</time>
+    }
+  </header>
+
+  @if (entry.message) {
+    <p class="log-entry__message">{{ entry.message }}</p>
+  }
+
+  @if (entry.fields.length) {
+    <dl class="log-entry__fields">
+      @for (field of entry.fields; track field.key) {
+        <div class="log-entry__field">
+          <dt>{{ field.key }}</dt>
+          @switch (fieldKind(field.value)) {
+            @case ('multiline') {
+              <dd><pre class="log-entry__pre">{{ displayValue(field.value) }}</pre></dd>
+            }
+            @case ('object') {
+              <dd>
+                <span class="log-entry__object">
+                  @for (sub of objectEntries(field.value); track sub.key) {
+                    <span class="log-entry__object-entry"><em>{{ sub.key }}</em>: {{ displayValue(sub.value) }}</span>
+                  }
+                </span>
+              </dd>
+            }
+            @default {
+              <dd>{{ displayValue(field.value) }}</dd>
+            }
+          }
+        </div>
+      }
+    </dl>
+  }
+</article>

@@ -1,3 +1,28 @@
 <div class="container">
-  Home Component
+  <p class="instructions">Drag and drop a JSON/NDJSON log file, or paste log content below, to view it formatted.</p>
+
+  <app-log-input (content)="onContent($event)"></app-log-input>
+
+  @if (entries.length || error) {
+    <div class="summary">
+      @if (entries.length) {
+        <span>{{ entries.length }} log {{ entries.length === 1 ? 'entry' : 'entries' }} parsed</span>
+      }
+      @if (parseErrorCount) {
+        <span class="summary__errors">{{ parseErrorCount }} line(s) could not be parsed</span>
+      }
+    </div>
+  }
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (entries.length) {
+    <div class="entries">
+      @for (entry of entries; track $index) {
+        <app-log-entry [entry]="entry"></app-log-entry>
+      }
+    </div>
+  }
 </div>
