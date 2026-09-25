@@ -112,6 +112,11 @@
     background-color: #606c38;
   }
 
+  &--order {
+    // Adds to the 8px flex gap for 40px total separation from Clear.
+    margin-left: 32px;
+  }
+
   &--secondary {
     background-color: transparent;
     color: #283618;

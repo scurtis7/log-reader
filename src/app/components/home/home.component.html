@@ -1,7 +1,7 @@
 <div class="container">
   <p class="instructions">Drag and drop a JSON/NDJSON log file, or paste log content below, to view it formatted.</p>
 
-  <app-log-input (content)="onContent($event)" (levelFilterChange)="onLevelFilterChange($event)"></app-log-input>
+  <app-log-input (content)="onContent($event)" (levelFilterChange)="onLevelFilterChange($event)" (reversedChange)="onReversedChange($event)"></app-log-input>
 
   @if (entries.length || error) {
     <div class="summary">

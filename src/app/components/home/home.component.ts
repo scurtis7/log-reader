@@ -16,7 +16,7 @@ export class HomeComponent {
   filteredEntries: LogEntry[] = [];
   error: string | null = null;
   parseErrorCount = 0;
-
+  private reversed = false;
   private selectedLevels = new Set<string>();
 
   constructor(private readonly logParser: LogParserService) {}
@@ -44,13 +44,17 @@ export class HomeComponent {
     this.applyFilter();
   }
 
+  onReversedChange(reversed: boolean): void {
+    this.reversed = reversed;
+    this.applyFilter();
+  }
+
   private applyFilter(): void {
-    if (this.selectedLevels.size === 0) {
-      this.filteredEntries = this.entries;
-      return;
-    }
-    this.filteredEntries = this.entries.filter(
-      (entry) => !!entry.level && this.selectedLevels.has(entry.level.toUpperCase())
-    );
+    const filtered = this.selectedLevels.size === 0
+      ? this.entries
+      : this.entries.filter(
+          (entry) => !!entry.level && this.selectedLevels.has(entry.level.toUpperCase())
+        );
+    this.filteredEntries = this.reversed ? [...filtered].reverse() : filtered;
   }
 }

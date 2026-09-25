@@ -35,6 +35,15 @@
     <div class="log-input__buttons">
       <button type="button" class="log-input__button" (click)="format()">Format Logs</button>
       <button type="button" class="log-input__button log-input__button--secondary" (click)="clear()">Clear</button>
+      <button
+        type="button"
+        class="log-input__button log-input__button--order"
+        [class.log-input__button--secondary]="!reversed"
+        [attr.aria-pressed]="reversed"
+        (click)="toggleOrder()"
+      >
+        ⇅ {{ reversed ? 'Reversed order' : 'Original order' }}
+      </button>
     </div>
 
     <div class="log-input__filters">

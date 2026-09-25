@@ -13,11 +13,13 @@ export const LOG_LEVEL_OPTIONS = ['Error', 'Warn', 'Info', 'Debug', 'Trace'] as 
 export class LogInputComponent {
   @Output() content = new EventEmitter<string>();
   @Output() levelFilterChange = new EventEmitter<Set<string>>();
+  @Output() reversedChange = new EventEmitter<boolean>();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   readonly levelOptions = LOG_LEVEL_OPTIONS;
   selectedLevels = new Set<string>();
+  reversed = false;
 
   pastedText = '';
   fileName: string | null = null;
@@ -64,6 +66,11 @@ export class LogInputComponent {
     this.pastedText = '';
     this.fileName = null;
     this.content.emit('');
+  }
+
+  toggleOrder(): void {
+    this.reversed = !this.reversed;
+    this.reversedChange.emit(this.reversed);
   }
 
   toggleLevel(level: string, event: Event): void {
